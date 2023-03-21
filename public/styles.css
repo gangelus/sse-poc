@@ -1,0 +1,13 @@
+* {
+    font-family: sans-serif;
+    color: white;
+}
+
+body {
+    background-color: #343541;
+}
+
+div#messages {
+    line-height: 180%;
+    font-size: 18px;
+}

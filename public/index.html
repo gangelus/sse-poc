@@ -3,40 +3,20 @@
     <head>
         <meta charset="UTF-8">
         <title>SSE POC</title>
-        <style>
-            * {
-                font-family: sans-serif;
-                color: white;
-            }
-
-            body {
-                background-color: #343541;
-            }
-
-            div#messages {
-                line-height: 180%;
-                font-size: 18px;
-            }
-        </style>
+        <link rel="stylesheet" href="/styles.css">
     </head>
     <body>
         <h1>SSE POC</h1>
         <div id="messages"></div>
 
         <script>
-            function writeToDom(event) {
-                const message = document.createElement('div');
-                message.innerHTML = `<b>Mensagem recebida:</b> ${event.data}`;
-                document.getElementById('messages').appendChild(message);
-            }
+            const source = new EventSource('/events');
 
-            const eventSource = new EventSource('/events');
-
-            // Event based listener
-            eventSource.addEventListener('current-time', writeToDom);
-
-            // Global listener
-            // eventSource.onmessage = writeToDom;
+            source.addEventListener('current-time', event => {
+                const div = document.createElement('div');
+                div.innerHTML = `<b>Mensagem recebida:</b> ${event.data}`;
+                document.getElementById('messages').appendChild(div);
+            });
         </script>
     </body>
 </html>
